@@ -23,11 +23,38 @@ const components = [
 
 const generatePassword = (length, upperCase, specialChars, digits) => {
     const passwordCharacters = [];
-    const password = "";
+    const previousComponents = [];
+    //let password = "";
 
+    //Generate random string
     for (let i = 0; i < length; i++){
+        let randomComponentPointer = Math.floor(Math.random() * 4);
+        let randomValuePointer;
 
+        while (upperCase === false && randomComponentPointer === 0 ||
+        specialChars === false && randomComponentPointer === 2 ||
+        digits === false && randomComponentPointer === 3){
+            randomComponentPointer = Math.floor(Math.random() * 4);
+        }
+
+        /*while(i === length - 1 && upperCase === true && previousComponents.includes(0) === false ||
+            i === length -1 && specialChars === true && previousComponents.includes(2) === false ||
+            i === length - 1 && digits === true && previousComponents.includes(3) === false){
+            randomComponentPointer = Math.floor(Math.random() * 4);
+        }*/
+
+        previousComponents.push(randomComponentPointer);
+
+        randomValuePointer = Math.floor(Math.random() * components[randomComponentPointer].length);
+
+        passwordCharacters.push(components[randomComponentPointer][randomValuePointer]);
     }
+
+    passwordCharacters.forEach(character => {
+
+            displayElement.innerText += character;
+
+    })
 
 }
 
@@ -40,4 +67,7 @@ generateBtn.addEventListener("click", () => {
     setTimeout(() => {
         generateBtn.classList.remove("clickedButton");
     }, 1000)
+
+    generatePassword(passwordLengthElement.value, includeUpperCharsElement.checked,
+        includeSpecialCharsElement.checked, includeDigitsElement.checked);
 })

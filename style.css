@@ -51,8 +51,9 @@ h1 {
 
 #display {
     width: 90%;
+    height: 75%;
     border-radius: 5px;
-    padding: 5px;
+    padding: 7px;
     padding-right: 10px;
     text-align: right;
     background-color: #f5f5f5;
