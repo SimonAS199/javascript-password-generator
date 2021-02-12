@@ -2,9 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Password Generator</title>
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div id="passwordGenerator">
 
+        <div id="header">
+
+            <h1>Password Generator</h1>
+
+        </div>
+
+        <div id="display"></div>
+
+        <label for="labelLength" style="grid-area: labelLength">Length:</label>
+        <input type="number" name="length" id="labelLength" style="grid-area: length">
+
+        <label for="labelUpper" style="grid-area: labelUpper">Include Uppercase:</label>
+        <input type="checkbox" id="labelUpper" style="grid-area: upper">
+
+        <label for="labelSpecial" style="grid-area: labelSpecial">Include Special:</label>
+        <input type="checkbox" id="labelSpecial" style="grid-area: special">
+
+        <label for="labelDigit" style="grid-area: labelDigits">Include Digits:</label>
+        <input type="checkbox" id="labelDigit" style="grid-area: digits">
+
+        <button id="generate">Generate</button>
+
+    </div>
 </body>
+<script src="main.js" type="text/javascript" rel="script"></script>
 </html>
