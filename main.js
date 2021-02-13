@@ -25,10 +25,10 @@ const generatePassword = (length, upperCase, specialChars, digits) => {
     const passwordCharacters = [];
     const previousComponents = [];
 
-    if (length < parseInt(passwordLengthElement.min) || length === ""){
+    if (length < parseInt(passwordLengthElement.min) || length === "") {
         length = passwordLengthElement.min;
         passwordLengthElement.value = passwordLengthElement.min.toString();
-    } else if (length > parseInt(passwordLengthElement.max)){
+    } else if (length > parseInt(passwordLengthElement.max)) {
         length = passwordLengthElement.max;
         passwordLengthElement.value = passwordLengthElement.max.toString();
     }
@@ -56,7 +56,7 @@ const generatePassword = (length, upperCase, specialChars, digits) => {
             }
         }
 
-        if (previousComponents.length < length){
+        if (previousComponents.length < length) {
             previousComponents.push(randomComponentPointer);
         }
 
@@ -85,4 +85,12 @@ generateBtn.addEventListener("click", () => {
 
     generatePassword(passwordLengthElement.value, includeUpperCharsElement.checked,
         includeSpecialCharsElement.checked, includeDigitsElement.checked);
+})
+
+passwordLengthElement.addEventListener("keydown", k => {
+    if (k.keyCode === 13) {
+        displayElement.innerText = "";
+        generatePassword(passwordLengthElement.value, includeUpperCharsElement.checked,
+            includeSpecialCharsElement.checked, includeDigitsElement.checked);
+    }
 })
