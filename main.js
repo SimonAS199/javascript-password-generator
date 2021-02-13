@@ -8,11 +8,11 @@ const includeDigitsElement = document.getElementById("digit");
 const components = [
     //uppercase [0]
     ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
-    "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
+        "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"],
 
     //lowercase [1]
     ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l",
-    "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
+        "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
 
     //special [2]
     ["!", "#", "$", "%", "&", "-", ".", "/", "?", "@", "_"],
@@ -24,26 +24,41 @@ const components = [
 const generatePassword = (length, upperCase, specialChars, digits) => {
     const passwordCharacters = [];
     const previousComponents = [];
-    //let password = "";
+
+    if (length < parseInt(passwordLengthElement.min) || length === ""){
+        length = passwordLengthElement.min;
+        passwordLengthElement.value = passwordLengthElement.min.toString();
+    } else if (length > parseInt(passwordLengthElement.max)){
+        length = passwordLengthElement.max;
+        passwordLengthElement.value = passwordLengthElement.max.toString();
+    }
 
     //Generate random string
-    for (let i = 0; i < length; i++){
+    for (let i = 0; i < length; i++) {
         let randomComponentPointer = Math.floor(Math.random() * 4);
         let randomValuePointer;
 
         while (upperCase === false && randomComponentPointer === 0 ||
         specialChars === false && randomComponentPointer === 2 ||
-        digits === false && randomComponentPointer === 3){
+        digits === false && randomComponentPointer === 3) {
             randomComponentPointer = Math.floor(Math.random() * 4);
         }
 
-        /*while(i === length - 1 && upperCase === true && previousComponents.includes(0) === false ||
-            i === length -1 && specialChars === true && previousComponents.includes(2) === false ||
-            i === length - 1 && digits === true && previousComponents.includes(3) === false){
+        while (i >= (length - 3) && upperCase === true && previousComponents.includes(0) === false ||
+        i >= (length - 3) && specialChars === true && previousComponents.includes(2) === false ||
+        i >= (length - 3) && digits === true && previousComponents.includes(3) === false) {
             randomComponentPointer = Math.floor(Math.random() * 4);
-        }*/
 
-        previousComponents.push(randomComponentPointer);
+            if (upperCase === true && randomComponentPointer === 0 && previousComponents.includes(0) === false ||
+                specialChars === true && randomComponentPointer === 2 && previousComponents.includes(2) === false ||
+                digits === true && randomComponentPointer === 3 && previousComponents.includes(3) === false) {
+                previousComponents.push(randomComponentPointer);
+            }
+        }
+
+        if (previousComponents.length < length){
+            previousComponents.push(randomComponentPointer);
+        }
 
         randomValuePointer = Math.floor(Math.random() * components[randomComponentPointer].length);
 
@@ -52,7 +67,7 @@ const generatePassword = (length, upperCase, specialChars, digits) => {
 
     passwordCharacters.forEach(character => {
 
-            displayElement.innerText += character;
+        displayElement.innerText += character;
 
     })
 
